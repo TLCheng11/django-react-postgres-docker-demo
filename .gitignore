@@ -10,3 +10,7 @@ media
 
 # database
 /data
+db.sqlite3
+
+# env secret
+.env
