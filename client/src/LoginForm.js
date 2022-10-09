@@ -16,13 +16,16 @@ function LoginForm() {
 
   function onFromSubmit(e) {
     e.preventDefault();
-    axiosInstance.post(`token/`, formInput).then((res) => {
-      console.log(res.data);
-      localStorage.setItem("access_token", res.data.access);
-      localStorage.setItem("refresh_token", res.data.refresh);
-      axiosInstance.defaults.headers["Authorization"] =
-        "JWT " + localStorage.getItem("access_token");
-    });
+    axiosInstance
+      .post(`token/`, formInput)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("access_token", res.data.access);
+        localStorage.setItem("refresh_token", res.data.refresh);
+        axiosInstance.defaults.headers["Authorization"] =
+          "JWT " + localStorage.getItem("access_token");
+      })
+      .catch((error) => console.log(error));
   }
 
   return (
