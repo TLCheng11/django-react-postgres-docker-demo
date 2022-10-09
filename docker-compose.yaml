@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:9292"
     volumes:
-      - ./api:/home/app
+      - ./api:/home/worker/app
     ports:
       - "9292:9292"
     depends_on:
@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     command: npm start
     volumes:
-      - ./client:/home/node
+      - ./client:/home/node/app
     ports:
       - "3000:3000"
     depends_on:
