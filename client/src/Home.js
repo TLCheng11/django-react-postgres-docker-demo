@@ -9,6 +9,15 @@ function Home() {
     axiosInstance.get("posts/").then((res) => console.log(res));
   }, []);
 
+  function logout() {
+    axiosInstance.post("users/logout/blacklist/", {
+      refresh_token: localStorage.getItem("refresh_token"),
+    });
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    axiosInstance.defaults.headers["Authorization"] = null;
+  }
+
   return (
     <div>
       <h1>Home Page</h1>
@@ -18,14 +27,7 @@ function Home() {
       <NavLink to="/signup">
         <p>signup</p>
       </NavLink>
-      <button
-        onClick={() => {
-          localStorage.removeItem("access_token");
-          localStorage.removeItem("refresh_token");
-        }}
-      >
-        Logout
-      </button>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }
