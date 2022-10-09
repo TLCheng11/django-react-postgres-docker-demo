@@ -1,7 +1,5 @@
-from secrets import choice
-from xmlrpc.client import DateTime
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import NewUser as User
 
 # Create your models here.
 

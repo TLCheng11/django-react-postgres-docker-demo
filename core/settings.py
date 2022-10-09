@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'users',
     'posts',
 ]
 
@@ -149,3 +150,5 @@ REST_FRAMEWORK = {
     )
 }
 
+# Use Custom User Models
+AUTH_USER_MODEL = 'users.NewUser'
