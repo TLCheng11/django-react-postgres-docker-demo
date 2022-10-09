@@ -13,9 +13,10 @@ function LoginForm() {
 
   return (
     <div>
-      <label htmlfor="email">email:</label>
+      <h1>Login Form:</h1>
+      <label htmlFor="email">email:</label>
       <input name="email" value={formInput.email} onChange={onFormInput} />
-      <label htmlfor="password">password:</label>
+      <label htmlFor="password">password:</label>
       <input
         name="password"
         value={formInput.password}
