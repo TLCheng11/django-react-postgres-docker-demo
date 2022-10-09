@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-WORKDIR /app
+WORKDIR /home/node
 
 # set ownership and permissions to default node user
 COPY --chown=node:node package.json .
