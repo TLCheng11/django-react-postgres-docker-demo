@@ -13,17 +13,18 @@ function SignupForm() {
     setFormInput({ ...formInput, [key]: e.target.value });
   }
 
-  function onFromSumbit(e) {
+  function onFromSubmit(e) {
     e.preventDefault();
     axiosInstance
       .post("users/register/", formInput)
-      .then((res) => console.log(res.data));
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error.response.data));
   }
 
   return (
     <div>
       <h1>Signup Form:</h1>
-      <form onSubmit={onFromSumbit}>
+      <form onSubmit={onFromSubmit}>
         <label htmlFor="email">email:</label>
         <input name="email" value={formInput.email} onChange={onFormInput} />
         <label htmlFor="username">username:</label>
