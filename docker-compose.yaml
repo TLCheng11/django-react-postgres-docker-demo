@@ -2,10 +2,12 @@ version: "3"
 
 services:
   api:
-    build: .
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:9292"
     volumes:
-      - .:/home/app
+      - ./api:/home/app
     ports:
       - "9292:9292"
     depends_on:
