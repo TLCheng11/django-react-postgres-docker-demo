@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { axiosInstance } from "./axios";
 
 function SignupForm() {
   const [formInput, setFormInput] = useState({
@@ -14,15 +15,9 @@ function SignupForm() {
 
   function onFromSumbit(e) {
     e.preventDefault();
-    fetch("users/register/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formInput),
-    })
-      .then((res) => res.json())
-      .then(console.log);
+    axiosInstance
+      .post("users/register/", formInput)
+      .then((res) => console.log(res.data));
   }
 
   return (
