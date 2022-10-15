@@ -10,6 +10,7 @@ media
 
 # database
 /data
+/redis
 db.sqlite3
 
 # env secret

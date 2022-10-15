@@ -10,7 +10,7 @@ function ChatRoom() {
   // to create a link to websocket
   useEffect(() => {
     const chatSocket = new WebSocket(
-      "ws://localhost:8000/ws/chats/" + params.room + "/"
+      "ws://localhost:9292/ws/chats/" + params.room + "/"
     );
     setSocket(chatSocket);
 
