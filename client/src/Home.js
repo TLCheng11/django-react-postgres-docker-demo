@@ -4,6 +4,7 @@ import { axiosInstance } from "./axios";
 
 function Home() {
   const [user, setUser] = useState({});
+  const [chatroom, setChatroom] = useState("");
 
   useEffect(() => {
     axiosInstance.get("posts/").then((res) => console.log(res));
@@ -28,6 +29,17 @@ function Home() {
         <p>signup</p>
       </NavLink>
       <button onClick={logout}>Logout</button>
+      <div style={{ display: "flex" }}>
+        <label htmlFor="chatroom">Room: </label>
+        <input
+          name="chatroom"
+          value={chatroom}
+          onChange={(e) => setChatroom(e.target.value)}
+        />
+        <NavLink to={`chatroom/${chatroom}`}>
+          <p>join</p>
+        </NavLink>
+      </div>
     </div>
   );
 }
