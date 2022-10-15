@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 app_name = 'posts'
 
-# using routes in defaultrouter, like resouces in rails
+# using routes in defaultrouter, like resouce in rails
 router = DefaultRouter()
 router.register('', PostList, basename='post')
 urlpatterns = router.urls
