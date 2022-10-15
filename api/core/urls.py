@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework.schemas import get_schema_view
+from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +27,10 @@ urlpatterns = [
     path('api/users/', include('users.urls')),
     path('api/posts/', include('posts.urls')),
     path('api/chats/', include('chats.urls')),
+    path('schema/', get_schema_view(
+            title="Django-React-Demo",
+            description="Testing for Django-React",
+            version="1.0.0"
+        ), name='openapi-schema'),
+    path('docs/', include_docs_urls(title='Django-React API'))
 ]
