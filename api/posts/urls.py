@@ -1,8 +1,15 @@
 from django.urls import path
-from . import views
+from .views import PostList
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    # path("", views.index, name="index"),
-    path("", views.PostList.as_view(), name="postList"),
-    path("<int:pk>/", views.PostDetail.as_view(), name="postDetail")
-]
+app_name = 'posts'
+
+# using routes in defaultrouter, like resouces in rails
+router = DefaultRouter()
+router.register('', PostList, basename='post')
+urlpatterns = router.urls
+
+# urlpatterns = [
+#     path('<int:pk>/', PostDetail.as_view(), name='detailcreate'),
+#     path('', PostList.as_view(), name='listcreate'),
+# ]
