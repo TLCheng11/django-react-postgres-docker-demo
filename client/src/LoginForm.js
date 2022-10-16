@@ -40,7 +40,7 @@ function LoginForm() {
           value={formInput.password}
           onChange={onFormInput}
         />
-        <button type="submit">Signup</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );

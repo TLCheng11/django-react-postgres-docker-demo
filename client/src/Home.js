@@ -5,6 +5,7 @@ import { axiosInstance } from "./axios";
 function Home() {
   const [user, setUser] = useState({});
   const [chatroom, setChatroom] = useState("");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     axiosInstance.get("posts/").then((res) => console.log(res));
@@ -38,6 +39,17 @@ function Home() {
         />
         <NavLink to={`chatroom/${chatroom}`}>
           <p>join</p>
+        </NavLink>
+      </div>
+      <div style={{ display: "flex" }}>
+        <label htmlFor="query">Search: </label>
+        <input
+          name="query"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <NavLink to={`search/${query}`}>
+          <p>search</p>
         </NavLink>
       </div>
     </div>

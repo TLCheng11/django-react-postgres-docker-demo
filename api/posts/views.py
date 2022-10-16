@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, filters
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from posts.models import Post
@@ -9,7 +9,7 @@ from posts.serializers import PostSerializer
 
 # ModelViewSet is like scarffold in rails
 class PostList(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     # queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -17,11 +17,25 @@ class PostList(viewsets.ModelViewSet):
     def get_object(self, queryset=None, **kwargs):
         # find post with title column instead of pk
         item = self.kwargs.get('pk')
-        return get_object_or_404(Post, title=item)
+        return get_object_or_404(Post, id=item)
 
     # Define Custom Queryset
     def get_queryset(self):
-        return Post.objects.filter(id__gte=2)
+        user = self.request.user
+        return Post.objects.filter(author=user)
+
+# custom search
+class PostSearch(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["^title"]
+
+    # '^' Starts-with search.
+    # '=' Exact matches.
+    # '@' Full-text search. (Currently only supported Django's PostgreSQL backend.)
+    # '$' Regex search.
 
 '''
 class PostList(viewsets.ViewSet):
@@ -29,19 +43,19 @@ class PostList(viewsets.ViewSet):
     queryset = Post.objects.all()
 
     def list(self, request):
-        serializer_class = PostSerializer(self.queryset, many=True)
-        return Response(serializer_class.data)
+        serializer = PostSerializer(self.queryset, many=True)
+        return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         post = get_object_or_404(self.queryset, pk=pk)
-        serializer_class = PostSerializer(post)
-        return Response(serializer_class.data)
+        serializer = PostSerializer(post)
+        return Response(serializer.data)
     
     def create(self, request):
-        serializer_class = PostSerializer(data=request.data)
+        serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer_class.data)
+            return Response(serializer.data)
 '''
 
 '''
