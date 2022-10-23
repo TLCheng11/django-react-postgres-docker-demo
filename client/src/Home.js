@@ -7,9 +7,9 @@ function Home() {
   const [chatroom, setChatroom] = useState("");
   const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    axiosInstance.get("posts/").then((res) => console.log(res));
-  }, []);
+  // useEffect(() => {
+  //   axiosInstance.get("posts/").then((res) => console.log(res));
+  // }, []);
 
   function logout() {
     axiosInstance.post("users/logout/blacklist/", {
